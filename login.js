@@ -1,80 +1,29 @@
-$( document ).ready(function() {
-    // DOM ready
 
-    // Test data
-    /*
-     * To test the script you should discomment the function
-     * testLocalStorageData and refresh the page. The function
-     * will load some test data and the loadProfile
-     * will do the changes in the UI
-     */
-    // testLocalStorageData();
-    // Load profile if it exits
-    loadProfile();
-});
 
-/**
- * Function that gets the data of the profile in case
- * thar it has already saved in localstorage. Only the
- * UI will be update in case that all data is available
- *
- * A not existing key in localstorage return null
- *
- */
-function getLocalProfile(callback){
-    var profileImgSrc      = localStorage.getItem("PROFILE_IMG_SRC");
-    var profileName        = localStorage.getItem("PROFILE_NAME");
-    var profileReAuthEmail = localStorage.getItem("PROFILE_REAUTH_EMAIL");
+var utenti = Array();
+let utente = {'Nome':'Daniele','Cognome':'Lupo','CF':'LPUDNL94D20A489M','ComuneDiNascita':'Atripalda','DataDiNascita':'20/04/1994','Indirizzo':'Via Traversa I','CAP':'83100','Cellulare':'3297270185','Email':'d.lupo1@studenti.unisa.it','CodiceOperatore':'0123456789','ZonaComando':'Avellino','Password':'Password'};
+utenti.push(utente);
 
-    if(profileName !== null
-            && profileReAuthEmail !== null
-            && profileImgSrc !== null) {
-        callback(profileImgSrc, profileName, profileReAuthEmail);
+console.log(utenti);
+
+function login(){
+    // Il controllo dei campi viene fatto dall'HTML
+    let codiceOperatore = document.getElementById('inputCodiceOperatore').value;
+    let password = document.getElementById('inputPassword').value;
+
+    // Cerco l'utente fra gli utenti
+    let u;
+    for(let i = 0; i < utenti.length; i++){
+        //console.log(utenti[i]);
+        u = utenti[i];
+        //console.log(u);
+        if(u.CodiceOperatore == codiceOperatore && u.Password == password){
+            var date = new Date();
+            var minutes = 60*8;
+            date.setTime(date.getTime() + (minutes * 60 * 1000));
+            setCookie('utente',u, date);
+            u = getCookie('utente');
+            console.log(u.Nome);
+        }
     }
-}
-
-/**
- * Main function that load the profile if exists
- * in localstorage
- */
-function loadProfile() {
-    if(!supportsHTML5Storage()) { return false; }
-    // we have to provide to the callback the basic
-    // information to set the profile
-    getLocalProfile(function(profileImgSrc, profileName, profileReAuthEmail) {
-        //changes in the UI
-        $("#profile-img").attr("src",profileImgSrc);
-        $("#profile-name").html(profileName);
-        $("#reauth-email").html(profileReAuthEmail);
-        $("#inputEmail").hide();
-    });
-}
-
-/**
- * function that checks if the browser supports HTML5
- * local storage
- *
- * @returns {boolean}
- */
-function supportsHTML5Storage() {
-    try {
-        return 'localStorage' in window && window['localStorage'] !== null;
-    } catch (e) {
-        return false;
-    }
-}
-
-/**
- * Test data. This data will be safe by the web app
- * in the first successful login of a auth user.
- * To Test the scripts, delete the localstorage data
- * and comment this call.
- *
- * @returns {boolean}
- */
-function testLocalStorageData() {
-    if(!supportsHTML5Storage()) { return false; }
-    localStorage.setItem("PROFILE_IMG_SRC", "//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" );
-    localStorage.setItem("PROFILE_NAME", "César Izquierdo Tello");
-    localStorage.setItem("PROFILE_REAUTH_EMAIL", "oneaccount@gmail.com");
 }
