@@ -18,25 +18,103 @@
         <div class="col-md-4" style="border-radius: 15px;border:2px solid #c62828; background: #eceff1">
             <form action="#">
                 </span><img src="Icons/flame256x256.png" style="padding-left: 24%; padding-top: 5%; padding-bottom: 5%">
-                <div class="form-group" style="margin-bottom:25px">
+                <div class="form-group" style="margin-bottom:25px; margin-left:5%">
                     <img src="Icons/firefighter64x64.png">
-                    <input type="email" style="width: 80%; display: inline;" class="form-control" id="email" placeholder="Codice operatore">
+                    <input type="email" style="width: 70%; display: inline;" class="form-control" id="email" placeholder="Codice operatore">
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="margin-left:5%">
                     <img src="Icons/locked64x64.png">
-                    <input type="password" style="width: 80%; display: inline; " class="form-control" id="pwd" placeholder="Password">
+                    <input type="password" style="width: 70%; display: inline; " class="form-control" id="pwd" placeholder="Password">
                 </div>
                 <span class="row">
                     <span class="col-md-4"></span>
                     <span class="col-md-4" style="text-align: center">
                         <button type="submit" class="btn bt-confirm" style="border:1px solid #c62828; border-radius: 7px; background: #ffffff">Accedi</button>
                         <br><br>
-                        <a href="registrati.html">Registrati</a>
+                        <a href="registrazione.html" data-toggle="modal" data-target="#modal-registrazione">Registrati</a>
+                        <div id="modal-registrazione" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h2 class="modal-title">Registrazione</h2>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Attenzione: tutti i campi sono obbligatori</p>
+                                        <form action="#">
+                                            <fieldset>
+                                                <legend>Dati personali</legend>
+                                                <div class="row">
+                                                        <span class="col-md-4">
+                                                            <input type="text" class="form-control" placeholder="Nome" required>
+                                                        </span>
+                                                        <span class="col-md-4">
+                                                            <input type="text" class="form-control" placeholder="Cognome" required>
+                                                        </span>
+                                                        <span class="col-md-4">
+                                                            <input type="text" class="form-control" placeholder="Codice fiscale" required>
+                                                        </span>
+                                                </div>
+                                                <div class="row" style="margin-top:10px">
+                                                        <span class="col-md-4">
+                                                            <input type="text" class="form-control" placeholder="Comune di nascita" required>                                                        
+                                                        </span>
+                                                        <span class="col-md-4">
+                                                            <input type="date" class="form-control" placeholder="Data di nascita" required>                                                    
+                                                        </span>
+                                                        <span class="col-md-4">
+                                                            <input type="text" class="form-control" placeholder="Indirizzo" required>                                                        
+                                                        </span>
+                                                </div>
+                                                <div class="row" style="margin-top:10px">
+                                                        <span class="col-md-4">
+                                                            <input type="text" class="form-control" placeholder="CAP" required>                                                        
+                                                        </span>
+                                                        <span class="col-md-4">
+                                                            <input type="text" class="form-control" placeholder="Cellulare" required>                                                        
+                                                        </span>
+                                                        <span class="col-md-4">
+                                                            <input type="email" class="form-control" placeholder="E-mail" required>                                                        
+                                                        </span>
+                                                </div>
+                                            </fieldset>
+                                            <fieldset>
+                                                <legend>Dati operatore</legend>
+                                                <div class="row">
+                                                    <span class="col-md-4">
+                                                            <input type="text" class="form-control" placeholder="Codice operatore" required>                                                    
+                                                    </span>
+                                                    <span class="col-md-4">
+                                                            <input type="text" class="form-control" placeholder="Zona comando" required>                                                        
+                                                    </span>
+                                                    <span class="col-md-4">
+                                                        
+                                                    </span>
+                                                </div>
+                                                <div class="row" style="margin-top:10px">
+                                                        <span class="col-md-4">
+                                                                <input type="password" class="form-control" placeholder="Password" required>                                                    
+                                                        </span>
+                                                        <span class="col-md-4">
+                                                                <input type="password" class="form-control" placeholder="Conferma password" required>                                                        
+                                                        </span>
+                                                        <span class="col-md-4">
+                                                            
+                                                        </span>
+                                                    </div>
+                                            </fieldset>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn bt-confirm" style="border:1px solid #c62828; border-radius: 7px; background: #ffffff">Conferma</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </span>
                     <span class="col-md-4"></span>
                 </span>
             </form>
-
         </div>
         <div class="col-md-4"></div>
     </div>
