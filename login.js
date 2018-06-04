@@ -7,9 +7,11 @@ if(utenti == null){
     let utente = {'Nome':'Daniele','Cognome':'Lupo','CF':'LPUDNL94D20A489M','ComuneDiNascita':'Atripalda','DataDiNascita':'20/04/1994','Indirizzo':'Via Traversa I','CAP':'83100','Cellulare':'3297270185','Email':'d.lupo1@studenti.unisa.it','CodiceOperatore':'0123456789','ZonaComando':'Avellino','Password':'Password'};
     utenti = Array();
     utenti.push(utente);
+    document.cookie = creaCookie('utenti', utenti);
 }
 
 function login(){
+    utenti = leggiCookie('utenti');
     // Il controllo dei campi viene fatto dall'HTML
     let codiceOperatore = document.getElementById('inputCodiceOperatore').value.trim();
     codiceOperatore = codiceOperatore.replace(" ","");
@@ -29,31 +31,79 @@ function login(){
     // Cerco l'utente fra gli utenti
     let u;
     for(let i = 0; i < utenti.length; i++){
-        //console.log(utenti[i]);
         u = utenti[i];
-        //console.log(u);
         if(u.CodiceOperatore == codiceOperatore && u.Password == password){
             document.cookie = creaCookie('utente',u);
+            document.cookie = creaCookie('utenti',utenti);
             window.location = "pannello.html";
-            return;
+            return true;
         }
-        alert('Username o password errati.');
     }
+    alert('Username o password errati.');
 }
 
 function registrazione(){
     // Salvo i dati e controllo mano mano
-    // TODO: Fare i vari check
-    let nome = document.getElementById('inputNome').value;
-    let cognome = document.getElementById('inputCognome').value;
-    let cf = document.getElementById('inputCodiceFiscale').value;
-    let comuneDiNascita = document.getElementById('inputComuneDiNascita').value;
-    let dataDiNascita = document.getElementById('inputDataDiNascita').value;
-    let indirizzo = document.getElementById('inputIndirizzo').value;
-    let CAP = document.getElementById('inputCAP').value;
-    let cellulare = document.getElementById('inputCellulare').value;
-    let email = document.getElementById('inputCellulare').value;
-    let zonaComando = document.getElementById('inputZonaComando').value;
+    let nome = document.getElementById('inputNome').value.trim();
+    if(nome.length == 0){
+        alert('Il nome non può essere vuoto.');
+        document.getElementById('inputNome').value = nome;
+        return false;
+    }
+    let cognome = document.getElementById('inputCognome').value.trim();
+    if(cognome.length == 0){
+        alert('Il cognome non può essere vuoto.');
+        document.getElementById('inputCognome').value = cognome;
+        return false;
+    }
+    let cf = document.getElementById('inputCodiceFiscale').value.trim();
+    if(cf.length == 0){
+        alert('Il codice fiscale non può essere vuoto.');
+        document.getElementById('inputCodiceFiscale').value = cf;
+        return false;
+    }
+    let comuneDiNascita = document.getElementById('inputComuneDiNascita').value.trim();
+    if(comuneDiNascita.length == 0){
+        alert('Il comune di nascita non può essere vuoto.');
+        document.getElementById('inputComuneDiNascita').value = comuneDiNascita;
+        return false;
+    }
+    let dataDiNascita = document.getElementById('inputDataDiNascita').value.trim();
+    if(dataDiNascita.length == 0){
+        alert('La data di nascita non può essere vuota.');
+        document.getElementById('inputDataDiNascita').value = dataDiNascita;
+        return false;
+    }
+    let indirizzo = document.getElementById('inputIndirizzo').value.trim();
+    if(indirizzo.length == 0){
+        alert('L\'indirizzo non può essere vuoto.');
+        document.getElementById('inputIndirizzo').value = indirizzo;
+        return false;
+    }
+    let CAP = document.getElementById('inputCAP').value.trim();
+    if(CAP.length == 0){
+        alert('Il CAP non può essere vuoto.');
+        document.getElementById('inputCAP').value = CAP;
+        return false;
+    }
+    let cellulare = document.getElementById('inputCellulare').value.trim();
+    if(cellulare.length == 0){
+        alert('Il cellulare non può essere vuoto.');
+        document.getElementById('inputCellulare').value = cellulare;
+        return false;
+    }
+    let email = document.getElementById('inputCellulare').value.trim();
+    if(email.length == 0){
+        alert('L\'email non può essere vuota.');
+        document.getElementById('inputCellulare').value = email;
+        return false;
+    }
+    let zonaComando = document.getElementById('inputZonaComando').value.trim();
+    if(zonaComando.length == 0){
+        alert('La zona di comando non può essere vuota.');
+        document.getElementById('inputZonaComando').value = zonaComando;
+        return false;
+    }
     let codiceOperatore = document.getElementById('inputCodiceOperatoreR').value.trim();
     codiceOperatore = codiceOperatore.replace(" ","");
     if(codiceOperatore.length == 0){
@@ -61,7 +111,6 @@ function registrazione(){
         document.getElementById('inputCodiceOperatoreR').value = document.getElementById('inputCodiceOperatoreR').value.trim();
         return false;
     }
-
     // Controllo subito i duplicati
     for(let i = 0; i < utenti.length; i++){
         if(utenti[i].CodiceOperatore == codiceOperatore){
@@ -69,7 +118,6 @@ function registrazione(){
             return false;
         }
     }
-
     let password = document.getElementById('inputPasswordR').value.trim();
     password = password.replace(" ","");
     if(password.length == 0){
@@ -84,11 +132,10 @@ function registrazione(){
         document.getElementById('inputRePasswordR').value = document.getElementById('inputRePasswordR').value.trim();
         return false;
     }
-
     let utente = {'Nome':nome,'Cognome':cognome,'CF':cf,'ComuneDiNascita':comuneDiNascita,'DataDiNascita':dataDiNascita,'Indirizzo':indirizzo,'CAP':CAP,'Cellulare':cellulare,'Email':email,'CodiceOperatore':codiceOperatore,'ZonaComando':zonaComando,'Password':password};
     utenti.push(utente);
-    document.cookie = creaCookie('utente', utente);
+    eliminaCookie('utente');
     document.cookie = creaCookie('utenti', utenti);
     alert('Registrazione avvenuta con successo.');
-    window.location = "pannello.html";
+    window.location.reload();
 }
