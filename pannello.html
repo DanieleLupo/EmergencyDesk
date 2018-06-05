@@ -60,14 +60,121 @@
         <div class="row">
             <div class="col-md-12">
             <div class="btn-group">
-                <button class="btn-circle" id="btAggiungiSegnalazione"><img src="./Icons/add32x32.png"/></button>
+                <button data-toggle="modal" data-target="#modalNuovaSegnalazione" class="btn-circle" id="btAggiungiSegnalazione"><img src="./Icons/add32x32.png"/></button>
             </div>
             </div>
         </div>
     </div>
 
     <!-- TODO: Valutare se fare un modal oppure aprire un'altra pagina -->
-    
+    <div id="modalNuovaSegnalazione" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h3 class="modal-title">Nuova segnalazione</h3>
+                </div>
+                <div class="modal-body">
+                    <!-- Riga automezzo -->
+                    <div class="row">
+                        <span class="col-md-8">
+                            <p id="labelAutomezzoSelezionato" style="padding-top:7px">Automezzo selezionato:</p>
+                        </span>
+                        <span class="col-md-4"><button class="btn btn-default" data-toggle="modal" data-target="#modalSelezioneVeicolo">Seleziona automezzo</button></span>
+                    </div>
+                    <!-- Campi -->
+                    <fieldset style="margin-top:15px">
+                        <legend style="text-align: center">Dati segnalazione</legend>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <input class="form-control" placeholder="Tipo di emergenza" id="inputTipoDiEmergenza"/>
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" placeholder="Indirizzo" id="inputIndirizzo"/>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row" style="margin-top:15px">
+                            <div class="col-md-5">
+                                <select class="form-control" id="selectGradoEmergenza">
+                                    <option value="-1">Grado di emergenza</option>
+                                    <option value="Basso">Basso</option>
+                                    <option value="Medio">Medio</option>
+                                    <option value="Alto">Alto</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3"></div>
+                            <div class="col-md-4" style="text-align:right; padding-right:25px">
+                                <button class="btn btn-default">Invia</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset style="margin-top:15px">
+                        <legend style="text-align:center;">Dati segnalatore</legend>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <input class="form-control" placeholder="Nome" id="inputNomeSegnalatore"/>
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" placeholder="Cognome" id="inputCognomeSegnalatore"/>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                        <div class="row" style="margin-top:15px">
+                            <div class="col-md-5">
+                                <input class="form-control" placeholder="Numero di telefono" id="inputNumeroDiTelefonoSegnalatore"/>
+                            </div>
+                            <div class="col-md-3"></div>
+                            <div class="col-md-4"style="text-align:right; padding-right:25px">
+                                <button class="btn btn-default">Invia</button>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:15px">
+                            <div class="col-md-12">
+                                <textarea class="form-control" rows="6" placeholder="Informazioni aggiuntive" id="inputInformazioniAggiuntive"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="md-col-12" style="text-align:right; padding-right:20px; margin-top:10px">
+                                <button class="btn btn-default">Invia</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="modal-footer" style="text-align:right">
+                    <span style="padding-right:7px">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </span> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal con l'elenco dei veicoli -->
+    <div id="modalSelezioneVeicolo" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">Seleziona veicolo</h3>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-striped" style="text-align:left">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Automezzo</th>
+                                    <th>Disponibilit&agrave;</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabellaElencoAutomezzi"></tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     <script src="gestoreCookie.js"></script>
     <script src="pannello.js"></script>
 </body>
