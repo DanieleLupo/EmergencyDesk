@@ -18,19 +18,15 @@
         <span class="col-sm-3">
             <h1>Elenco segnalazioni</h1>
         </span>
-        <span class="col-sm-7"></span>
-        <span class="col-sm-2" style="text-align: right">
-            <div class="row">&nbsp;</div>
-            <div class="row">&nbsp;</div>
-            <div class="row">
-                <div class="col-sm-4"></div>
-                <div class="col-sm-3"></div>
-                <div class="col-sm-3">
-                    <!-- TODO: Mettere l'icona al tasto logout -->
-                    <button onclick="logout('utente')">Logout</button>
+        <span class="col-sm-9" style="text-align:right">
+                <div class="row">&nbsp;</div>
+                <div class="row">&nbsp;</div>
+                <div class="row">
+                <h4 style="display:inline; padding-right:7px" id="datiUtente"></h4>
+                <button style="display:inline" onclick="logout('utente')">Logout</button>
                 </div>
-            </div>
         </span>
+        
     </div>
     <!-- Fine barra -->
     <div class="row" style="margin-top:2%">
@@ -66,67 +62,70 @@
         </div>
     </div>
 
-    <!-- TODO: Valutare se fare un modal oppure aprire un'altra pagina -->
     <div id="modalNuovaSegnalazione" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h3 class="modal-title">Nuova segnalazione</h3>
+                    <h3 id="titleModalSegnalazione" class="modal-title">Nuova segnalazione</h3>
                 </div>
                 <div class="modal-body">
                     <!-- Riga automezzo -->
                     <div class="row">
                         <span class="col-md-8">
-                            <p id="labelAutomezzoSelezionato" style="padding-top:7px">Automezzo selezionato:</p>
+                            <p id="labelAutomezzoSelezionato" style="padding-top:7px">Automezzo selezionato: Nessuno</p>
                         </span>
-                        <span class="col-md-4"><button class="btn btn-default" data-toggle="modal" data-target="#modalSelezioneVeicolo">Seleziona automezzo</button></span>
+                        <span class="col-md-4"><button id="btSelezionaAutomezzo" onclick="popolaTabellaAutomezzi()" class="btn btn-default" data-toggle="modal" data-target="#modalSelezioneVeicolo">Seleziona automezzo</button></span>
                     </div>
                     <!-- Campi -->
                     <fieldset style="margin-top:15px">
                         <legend style="text-align: center">Dati segnalazione</legend>
-                        <div class="row">
-                            <div class="col-md-5">
-                                <input class="form-control" placeholder="Tipo di emergenza" id="inputTipoDiEmergenza"/>
+                        <form action="#">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <input class="form-control" placeholder="Tipo di emergenza" id="inputTipoDiEmergenza" required/>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control" placeholder="Indirizzo" id="inputIndirizzo" required/>
+                                </div>
+                                <div class="col-md-3"></div>
                             </div>
-                            <div class="col-md-4">
-                                <input class="form-control" placeholder="Indirizzo" id="inputIndirizzo"/>
+                            <div class="row" style="margin-top:15px">
+                                <div class="col-md-5">
+                                    <select class="form-control" id="selectGradoEmergenza" required>
+                                        <option value="-1">Grado di emergenza</option>
+                                        <option value="Basso">Basso</option>
+                                        <option value="Medio">Medio</option>
+                                        <option value="Alto">Alto</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control" placeholder="Zona" id="inputZona" required/>
+                                </div>
+                                <div class="col-md-3" style="text-align:right; padding-right:25px">
+                                    <button onclick="inviaDatiSoloSegnalazione()" class="btn btn-default">Invia</button>
+                                </div>
                             </div>
-                            <div class="col-md-3"></div>
-                        </div>
-                        <div class="row" style="margin-top:15px">
-                            <div class="col-md-5">
-                                <select class="form-control" id="selectGradoEmergenza">
-                                    <option value="-1">Grado di emergenza</option>
-                                    <option value="Basso">Basso</option>
-                                    <option value="Medio">Medio</option>
-                                    <option value="Alto">Alto</option>
-                                </select>
-                            </div>
-                            <div class="col-md-3"></div>
-                            <div class="col-md-4" style="text-align:right; padding-right:25px">
-                                <button class="btn btn-default">Invia</button>
-                            </div>
-                        </div>
+                        </form>
                     </fieldset>
                     <fieldset style="margin-top:15px">
                         <legend style="text-align:center;">Dati segnalatore</legend>
                         <div class="row">
                             <div class="col-md-5">
-                                <input class="form-control" placeholder="Nome" id="inputNomeSegnalatore"/>
+                                <input class="form-control" placeholder="Nome" id="inputNomeSegnalatore" required/>
                             </div>
                             <div class="col-md-4">
-                                <input class="form-control" placeholder="Cognome" id="inputCognomeSegnalatore"/>
+                                <input class="form-control" placeholder="Cognome" id="inputCognomeSegnalatore" required/>
                             </div>
                             <div class="col-md-3"></div>
                         </div>
                         <div class="row" style="margin-top:15px">
                             <div class="col-md-5">
-                                <input class="form-control" placeholder="Numero di telefono" id="inputNumeroDiTelefonoSegnalatore"/>
+                                <input class="form-control" placeholder="Numero di telefono" id="inputNumeroDiTelefonoSegnalatore" required/>
                             </div>
                             <div class="col-md-3"></div>
                             <div class="col-md-4"style="text-align:right; padding-right:25px">
-                                <button class="btn btn-default">Invia</button>
+                                <button onclick="inviaDatiSoloSegnalatore()" class="btn btn-default">Invia</button>
                             </div>
                         </div>
                         <div class="row" style="margin-top:15px">
@@ -136,14 +135,17 @@
                         </div>
                         <div class="row">
                             <div class="md-col-12" style="text-align:right; padding-right:20px; margin-top:10px">
-                                <button class="btn btn-default">Invia</button>
+                                <button onclick="inviaInformazioniAggiuntive()" class="btn btn-default">Invia</button>
                             </div>
                         </div>
                     </fieldset>
                 </div>
-                <div class="modal-footer" style="text-align:right">
-                    <span style="padding-right:7px">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <div class="modal-footer">
+                    <span style="padding-left:7px">
+                        <button onclick="inviaDati()" type="button" class="btn btn-success">Conferma</button>                    
+                    </span>
+                    <span style="padding-right:7px; text-align: right">
+                        <button id="btCloseModalSegnalazione" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </span> 
                 </div>
             </div>
@@ -166,11 +168,13 @@
                                     <th>Disponibilit&agrave;</th>
                                 </tr>
                             </thead>
-                            <tbody id="tabellaElencoAutomezzi"></tbody>
+                            <tbody id="tabellaElencoAutomezzi">
+                                
+                            </tbody>
                         </table>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button id="btCloseModalAutomezzi" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
