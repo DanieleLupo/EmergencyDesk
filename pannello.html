@@ -23,7 +23,8 @@
                 <div class="row">&nbsp;</div>
                 <div class="row">
                 <h4 style="display:inline; padding-right:7px" id="datiUtente"></h4>
-                <button style="display:inline" onclick="logout('utente')">Logout</button>
+                <!-- <button class="btn btn-default" style="margin-right: 20px" onclick="logout('utente')"><img width="30px" height="30px" src="./Icons/logout.png" alt="Logout"></button> -->
+                <img id="btLogout" style="margin-right: 20px; margin-bottom: 7px" onclick="logout('utente')" width="35px" height="35px" src="./Icons/logout.png" alt="Logout"></img>
                 </div>
         </span>
         
@@ -55,9 +56,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-            <div class="btn-group">
-                <button data-toggle="modal" data-target="#modalNuovaSegnalazione" class="btn-circle" id="btAggiungiSegnalazione"><img src="./Icons/add32x32.png"/></button>
-            </div>
+                <div>
+                    <img width="70px" height="70px" data-toggle="modal" data-target="#modalNuovaSegnalazione" id="btAggiungiSegnalazione" src="./Icons/add.png"/>
+                </div>
+            <!-- <div class="btn-group"> -->
+                <!-- <button data-toggle="modal" data-target="#modalNuovaSegnalazione" class="btn-circle" id="btAggiungiSegnalazione"><img src="./Icons/add50x50.png"/></button> -->
+            <!-- </div> -->
             </div>
         </div>
     </div>
@@ -145,7 +149,7 @@
                         <button onclick="inviaDati()" type="button" class="btn btn-success">Conferma</button>                    
                     </span>
                     <span style="padding-right:7px; text-align: right">
-                        <button id="btCloseModalSegnalazione" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button id="btCloseModalSegnalazione" type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
                     </span> 
                 </div>
             </div>
@@ -174,7 +178,7 @@
                         </table>
                     </div>
                     <div class="modal-footer">
-                        <button id="btCloseModalAutomezzi" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button id="btCloseModalAutomezzi" type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
                     </div>
                 </div>
             </div>

@@ -20,12 +20,14 @@ function popolaTabella(){
     for(let i = 0; i < segnalazioni.length; i++){
         s = segnalazioni[i];
         // TODO: Mettere l'icona al tasto edit
-        tbody.innerHTML += '<tr><td>' + s.ID + '</td><td>'+ s.Segnalazione +'</td><td>' + s.GradoEmergenza + '</td><td>' + s.Zona + '</td><td>' + s.Automezzo + '</td><td><button data-toggle="modal" data-target="#modalNuovaSegnalazione" onclick=modifica('+i+')>Edit</button></tr>';
+        tbody.innerHTML += '<tr><td>' + s.ID + '</td><td>'+ s.Segnalazione +'</td><td>' + s.GradoEmergenza + '</td><td>' + s.Zona + '</td><td>' + s.Automezzo + '</td><td><img class="btEdit" src="./Icons/pencil32x32.png" width="24px" height="24px" data-toggle="modal" data-target="#modalNuovaSegnalazione" onclick=modifica('+i+')></tr>';
     }
 }
 
 document.getElementById('btAggiungiSegnalazione').addEventListener('click', function(){
-    document.getElementById('btSelezionaAutomezzo').disabled = false;
+    pulisciCampiModalSegnalazione();
+    //document.getElementById('btSelezionaAutomezzo').disabled = false;
+    document.getElementById('titleModalSegnalazione').innerText = 'Nuova segnalazione';
 });
 
 
@@ -37,15 +39,34 @@ let step1 = false;
 let step2 = false;
 let step3 = false;
 
+function pulisciCampiModalSegnalazione(){
+    segnalazione = {"ID":'', 'Segnalazione':'','GradoEmergenza':'','Zona':'','Automezzo':'', 'Nome':'', 'Cognome':'','NumeroDiTelefono':'','InformazioniAggiuntive':'','Tipo':'','Indirizzo':''};
+    document.getElementById('btSelezionaAutomezzo').disabled = false;
+    document.getElementById('labelAutomezzoSelezionato').innerText = "Automezzo selezionato: Nessuno";
+    //segnalazione.Automezzo = null;
+    document.getElementById('inputTipoDiEmergenza').value = "";
+    document.getElementById('inputIndirizzo').value = "";
+    document.getElementById('inputZona').value = "";
+    document.getElementById('inputNomeSegnalatore').value = "";
+    document.getElementById('inputCognomeSegnalatore').value = "";
+    document.getElementById('inputNumeroDiTelefonoSegnalatore').value = "";
+    document.getElementById('inputInformazioniAggiuntive').value = "";
+    document.getElementById('selectGradoEmergenza').selectedIndex = 0;
+    step1 = false;
+    step2 = false;
+    step3 = false;
+}
+
 
 
 function modifica(indiceSegnalazione){
+    pulisciCampiModalSegnalazione();
     segnalazione = segnalazioni[indiceSegnalazione];
-    console.log(segnalazione);
+    document.getElementById('titleModalSegnalazione').innerText = "Modifica segnalazione";
     // Disabilito il tasto dell'automezzo
     document.getElementById('btSelezionaAutomezzo').disabled = true;
     // Imposto i valori nei vari campi
-    document.getElementById('labelAutomezzoSelezionato').innerHTML = "Automezzo selezionato: " + segnalazione.Automezzo;
+    document.getElementById('labelAutomezzoSelezionato').innerText = "Automezzo selezionato: " + segnalazione.Automezzo;
     automezzo = segnalazione.Automezzo;
     document.getElementById('inputTipoDiEmergenza').value = segnalazione.Tipo;
     document.getElementById('inputIndirizzo').value = segnalazione.Indirizzo;
