@@ -1,0 +1,39 @@
+/* FIXME: Ridefinire i colori */
+div.barra{
+    padding-left:1%;
+    color:white;
+    padding-top:0.1%; 
+    background: #bc0003ce;
+    border-bottom: 1px solid #bc0003ce;
+}
+
+thead th{
+    text-align:left;
+}
+
+/* Floating material button */
+#btAggiungiSegnalazione{
+    position: fixed !important;
+    right: 29px;
+    bottom: 20px;
+    /* background: green; */
+}
+
+#btAggiungiSegnalazione:hover, #btLogout:hover{
+    cursor: pointer;
+}
+
+.btEdit:hover{
+    cursor: pointer;
+}
+
+.btn-circle {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    padding: 0px 0;
+    font-size: 12px;
+    line-height: 1.42;
+    border-radius: 30px;
+    border: 1px solid black;
+  }
